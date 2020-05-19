@@ -44,7 +44,7 @@ class App {
         a.render(null, a);
     }
 
-    render = function(e, a) {
+    render(e, a) {
         a.now = new Date().getTime();
         a.delta = a.now - a.then;
         if (a.delta > a.interval) {
@@ -59,7 +59,7 @@ class App {
         requestAnimationFrame(function(e) { a.render(e, a); });
     }
 
-    update = function(e, a) {
+    update(e, a) {
         Matter.Body.setAngularVelocity(a.player.rectangle, 0.0015);
         a.camera.position.x = a.player.position.x;
         a.camera.position.y = a.player.position.y + 100;
@@ -74,7 +74,7 @@ class App {
         }
     }
 
-    resizeWindow = function(e, a) {
+    resizeWindow(e, a) {
         var screenWidth = a.window.innerWidth;
         var screenHeight = a.window.innerHeight;
         a.camera.aspect = screenWidth / screenHeight;

@@ -29,29 +29,29 @@ class Cube extends THREE.Mesh {
         this.setScale(options.scaleX, options.scaleY, options.scaleZ);
     }
 
-    setPosition = function(x, y, z, updateOrigin = true) {
+    setPosition(x, y, z, updateOrigin = true) {
         this.position.set(x, y, z);
         Matter.Body.setPosition(this.rectangle, { x: x, y: -y });
         if (updateOrigin == true) this.setPositionOrigin(x, y, z);
     }
 
-    setPositionOrigin = function(x, y, z) {
+    setPositionOrigin(x, y, z) {
         this.xOrigin = x;
         this.yOrigin = y;
         this.zOrigin = z;
     }
 
-    setRotation = function(angle, updateOrigin = true) {
+    setRotation(angle, updateOrigin = true) {
         this.rotation.z = angle;
         Matter.Body.setAngle(this.rectangle, -angle);
         if (updateOrigin == true) this.setRotationOrigin(angle);
     }
 
-    setRotationOrigin = function(angle) {
+    setRotationOrigin(angle) {
         this.rotationOrigin = angle;
     }
 
-    setScale = function(scaleX, scaleY, scaleZ, updateOrigin = true) {
+    setScale(scaleX, scaleY, scaleZ, updateOrigin = true) {
         // Temporarily set rectangle angle to zero to prevent skewing
         var tempAngle = this.rotation.z;
         this.setRotation(0);
@@ -65,13 +65,13 @@ class Cube extends THREE.Mesh {
         if (updateOrigin == true) this.setScaleOrigin(scaleX, scaleY, scaleZ);
     }
 
-    setScaleOrigin = function(scaleX, scaleY, scaleZ) {
+    setScaleOrigin(scaleX, scaleY, scaleZ) {
         this.scaleXOrigin = scaleX;
         this.scaleYOrigin = scaleY;
         this.scaleZOrigin = scaleZ;
     }
 
-    resetToOrigin = function() {
+    resetToOrigin() {
         this.setPosition(this.xOrigin, this.yOrigin, this.ZOrigin, false);
         this.setRotation(this.rotationOrigin, false);
         this.setScale(this.scaleXOrigin, this.scaleYOrigin, this.scaleZOrigin, false);
@@ -80,40 +80,40 @@ class Cube extends THREE.Mesh {
         Matter.Body.setAngularVelocity(this.rectangle, 0);
     }
 
-    setColor = function(color, updateOrigin = true) {
+    setColor(color, updateOrigin = true) {
         this.material.color.set(color);
         if (updateOrigin == true) this.setColorOrigin(color);
     }
 
-    setColorOrigin = function(color) {
+    setColorOrigin(color) {
         this.colorOrigin = color;
     }
 
-    setStatic = function(isStatic, updateOrigin = true) {
+    setStatic(isStatic, updateOrigin = true) {
         Matter.Body.setStatic(this.rectangle, isStatic);
         if (updateOrigin == true) this.setStaticOrigin(isStatic);
     }
 
-    setStaticOrigin = function(isStatic) {
+    setStaticOrigin(isStatic) {
         this.isStaticOrigin = isStatic;
     }
 
-    toggleStatic = function() {
+    toggleStatic() {
         var isStatic = !this.rectangle.isStatic;
         this.setStatic(isStatic);
         return isStatic;
     }
 
-    isStatic = function() {
+    isStatic() {
         return this.rectangle.isStatic;
     }
 
-    select = function(state = true) {
+    select(state = true) {
         this.selected = state;
         this.setColor(this.selected ? '#ffffff' : this.colorOrigin, false);
     }
 
-    toggleSelected = function() {
+    toggleSelected() {
         this.selected = !this.selected;
         this.setColor(this.selected ? '#ffffff' : this.colorOrigin, false);
         return this.selected;
